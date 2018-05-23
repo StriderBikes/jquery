@@ -15,7 +15,12 @@ jQuery.ajaxSetup({
 		}
 	}
 });
-
+// prevent autotyping js scripts if from cross domain
+jQuery.ajaxPrefilter( function( s ) {
+    if ( s.crossDomain ) {
+        s.contents.script = false;
+    }
+} );
 // Handle cache's special case and global
 jQuery.ajaxPrefilter( "script", function( s ) {
 	if ( s.cache === undefined ) {
